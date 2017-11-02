@@ -1,0 +1,12 @@
+#!/bin/sh
+basedir=$PWD
+while [ $basedir != "/" ] &&  [  ! -e "$basedir/gradlew" ] && [ ! -x "$basedir/gradlew" ] ; do
+  basedir=`dirname $basedir`
+done
+
+if [ $basedir == "/" ] ; then
+  echo "Could not find gradle wrapper in any of the parent directories"
+  exit 1
+else
+  "$basedir/gradlew" "$@"
+fi
