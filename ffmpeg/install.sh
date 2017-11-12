@@ -1,4 +1,6 @@
 #!/bin/bash
+# dependencies: autoconf automake build-essential git-core libass-dev libgpac-dev libsdl1.2-dev libtheora-dev libtool libvdpau-dev libvorbis-dev libx11-dev libxext-dev libxfixes-dev pkg-config texi2html zlib1g-dev libmp3lame-dev nasm gcc yasm
+
 set -o xtrace
 START_DIR=$PWD
 rm -rf "$START_DIR/ffmpeg_sources" "$START_DIR/ffmpeg_build" "$START_DIR/bin"
