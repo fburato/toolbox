@@ -1,3 +1,2 @@
 #!/bin/bash
-file=$(basename "$1")
-ffmpeg -i "$1" -c:a libfdk_aac -vbr 5 "${file%.*}.m4a"
+file=$(basename "$1") && ffmpeg -i "$1" -c:a libfdk_aac -vbr 5 "${file%.*}.m4a"
