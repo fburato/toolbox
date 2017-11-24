@@ -1,8 +1,8 @@
 #!/bin/bash
 # dependencies: autoconf automake build-essential git-core libass-dev libgpac-dev libsdl1.2-dev libtheora-dev libtool libvdpau-dev libvorbis-dev libx11-dev libxext-dev libxfixes-dev pkg-config texi2html zlib1g-dev libmp3lame-dev nasm gcc yasm 
-
+set -e
 set -o xtrace
-START_DIR=$PWD
+START_DIR=/build
 rm -rf "$START_DIR/ffmpeg_sources" "$START_DIR/ffmpeg_build" "$START_DIR/bin"
 mkdir -p "$START_DIR/ffmpeg_sources" "$START_DIR/ffmpeg_build"
 
@@ -19,7 +19,7 @@ cd $START_DIR/ffmpeg_sources && \
   wget http://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz && \
   tar xzvf lame-3.99.5.tar.gz && \
   cd lame-3.99.5 && \
-  ./configure --prefix="$HOME/ffmpeg_build" --enable-nasm --disable-shared && \
+  ./configure --prefix="$START_DIR/ffmpeg_build" --enable-nasm --disable-shared && \
   make && \
   make install && \
   make distclean
@@ -38,3 +38,6 @@ cd $START_DIR/ffmpeg_sources && \
   make distclean
 
 $START_DIR/bin/ffmpeg 2>&1 | head -n1
+
+cd /build/bin && \
+    docker build -t ffmpeg .

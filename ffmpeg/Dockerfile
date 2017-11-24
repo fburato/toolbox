@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y autoconf automake build-essential git-core libass-dev libgpac-dev libsdl1.2-dev libtheora-dev libtool libvdpau-dev libvorbis-dev libx11-dev libxext-dev libxfixes-dev pkg-config texi2html zlib1g-dev libmp3lame-dev nasm gcc yasm curl && \
+    apt-get install -y autoconf automake build-essential git-core libass-dev libgpac-dev libsdl1.2-dev libtheora-dev libtool libvdpau-dev libvorbis-dev libx11-dev libxext-dev libxfixes-dev pkg-config texi2html zlib1g-dev libmp3lame-dev nasm gcc yasm curl wget && \
     rm -rf /var/lib/apt/lists/*
 
 # Install docker client
@@ -17,9 +17,8 @@ RUN chmod a+x /build/install.sh
 
 WORKDIR /build
 
-RUN ./install.sh
-
 ADD Dockerfile-internal /build/bin/Dockerfile
 
-RUN cd /build/bin && \
-    docker build -t ffmpeg .
+ENV DOCKER_HOST=tcp://172.17.0.1:2375
+
+CMD /build/install.sh
