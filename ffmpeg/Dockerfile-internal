@@ -1,0 +1,7 @@
+FROM alpine
+
+ADD ffmpeg /bin/ffmpeg
+ADD ffprobe /bin/ffprobe
+ADD ffserver /bin/ffserver
+
+VOLUME /data
