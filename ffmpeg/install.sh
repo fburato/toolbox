@@ -34,5 +34,3 @@ cd $START_DIR/ffmpeg_sources && \
 
 $START_DIR/bin/ffmpeg 2>&1 | head -n1
 
-cd /build/bin && \
-    docker build -t ffmpeg .
